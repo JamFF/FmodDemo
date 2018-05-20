@@ -1,5 +1,5 @@
 #include "common.h"
-#include "inc/fmod_errors.h"
+#include "fmod_errors.h"
 
 void (*Common_Private_Error)(FMOD_RESULT, const char *, int);
 

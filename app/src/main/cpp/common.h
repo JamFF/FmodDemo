@@ -2,7 +2,7 @@
 #define FMOD_EXAMPLES_COMMON_H
 
 #include "common_platform.h"
-#include "inc\fmod.h"
+#include "fmod.h"
 
 #include <stddef.h>
 #include <string.h>

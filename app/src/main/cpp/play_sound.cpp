@@ -8,7 +8,7 @@ loads. If the sounds are big and possibly take up a lot of RAM it would be
 better to use the FMOD_CREATESTREAM flag, this will stream the file in realtime
 as it plays.
 ==============================================================================*/
-#include "inc\fmod.hpp"
+#include "fmod.hpp"
 #include "common.h"
 
 int FMOD_Main()
@@ -19,7 +19,7 @@ int FMOD_Main()
     FMOD_RESULT       result;
     unsigned int      version;
     void             *extradriverdata = 0;
-    
+
     Common_Init(&extradriverdata);
 
     /*
@@ -107,7 +107,7 @@ int FMOD_Main()
                 {
                     ERRCHECK(result);
                 }
-               
+
                 channel->getCurrentSound(&currentsound);
                 if (currentsound)
                 {
