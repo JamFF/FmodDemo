@@ -17,7 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/inc)
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
-             qq_voice
+             play_sound
 
              # Sets the library as a shared library.
              SHARED
@@ -59,7 +59,7 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-                       qq_voice
+                       play_sound
                        fmod
                        fmodL
 

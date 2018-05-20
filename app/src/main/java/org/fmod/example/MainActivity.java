@@ -161,7 +161,8 @@ public class MainActivity extends Activity implements OnTouchListener, Runnable 
          * load 'fmodstudio'.
          */
 
-        /*// Try debug libraries...
+        /*
+        // Try debug libraries...
         try {
             System.loadLibrary("fmodD");
             System.loadLibrary("fmodstudioD");
@@ -180,8 +181,11 @@ public class MainActivity extends Activity implements OnTouchListener, Runnable 
         } catch (UnsatisfiedLinkError e) {
         }
 
-        System.loadLibrary("stlport_shared");*/
-        // 修改为项目中的动态库
-        System.loadLibrary("qq_voice");
+        System.loadLibrary("stlport_shared");
+        System.loadLibrary("example");
+        */
+
+        // 使用重新编译的play_sound.so
+        System.loadLibrary("play_sound");
     }
 }
