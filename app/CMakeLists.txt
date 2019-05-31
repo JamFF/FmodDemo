@@ -17,29 +17,32 @@ include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/inc)
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
-             play_sound
+        play_sound
 
-             # Sets the library as a shared library.
-             SHARED
+        # Sets the library as a shared library.
+        SHARED
 
-             # Provides a relative path to your source file(s).
-             src/main/cpp/common_platform.cpp
-             src/main/cpp/play_sound.cpp
-             src/main/cpp/common.cpp )
+        # Provides a relative path to your source file(s).
+        src/main/cpp/common_platform.cpp
+        src/main/cpp/play_sound.cpp
+        src/main/cpp/common.cpp)
 
-set(LIB_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs)
+set(ABI_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${CMAKE_ANDROID_ARCH_ABI})
 
-add_library(fmod SHARED IMPORTED)
+#[[add_library(fmod SHARED IMPORTED)
 # 设置导入的路径
 set_target_properties(fmod
-                      PROPERTIES IMPORTED_LOCATION
-                      ${LIB_DIR}/${ANDROID_ABI}/libfmod.so)
+        PROPERTIES IMPORTED_LOCATION
+        ${ABI_DIR}/libfmod.so)
 
 add_library(fmodL SHARED IMPORTED)
 # 设置导入的路径
 set_target_properties(fmodL
-                      PROPERTIES IMPORTED_LOCATION
-                      ${LIB_DIR}/${ANDROID_ABI}/libfmodL.so)
+        PROPERTIES IMPORTED_LOCATION
+        ${ABI_DIR}/libfmodL.so)]]
+
+# 设置第三方so库的路径，可以一起引入多个库，可代替上面libfmod.so和libfmodL.so单独引用的多行代码
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L${ABI_DIR}")
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -48,21 +51,21 @@ set_target_properties(fmodL
 # completing its build.
 
 find_library( # Sets the name of the path variable.
-              log-lib
+        log-lib
 
-              # Specifies the name of the NDK library that
-              # you want CMake to locate.
-              log )
+        # Specifies the name of the NDK library that
+        # you want CMake to locate.
+        log)
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-                       play_sound
-                       fmod
-                       fmodL
+        play_sound
+        fmod
+        fmodL
 
-                       # Links the target library to the log library
-                       # included in the NDK.
-                       ${log-lib} )
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib})
