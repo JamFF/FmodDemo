@@ -5,10 +5,14 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-# 设置生成的so动态库最后输出的目录，PROJECT_SOURCE_DIR是app目录
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI})
+# 设置生成的so动态库最后输出的目录，CMAKE_SOURCE_DIR就是CMakeLists.txt所在的路径，在gradle中配置
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI})
 
-# 设置头文件目录，C文件中include时不需要带路径了，CMAKE_SOURCE_DIR就是CMakeLists.txt所在的路径
+# CMAKE_SOURCE_DIR 和 PROJECT_SOURCE_DIR 这两个变量在AS目录结构下是一样的，在CMake的其它应用场景，可能会不一样
+message("CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+message("PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
+
+# 设置头文件目录，C文件中include时不需要带路径了
 include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/inc)
 
 # Creates and names a library, sets it as either STATIC
