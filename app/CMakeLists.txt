@@ -5,10 +5,10 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-# 设置生成的so动态库最后输出的路径
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
+# 设置生成的so动态库最后输出的目录，PROJECT_SOURCE_DIR是app目录
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI})
 
-# 设置头文件路径，在代码中include时不需要带路径了
+# 设置头文件目录，C文件中include时不需要带路径了，CMAKE_SOURCE_DIR就是CMakeLists.txt所在的路径
 include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/inc)
 
 # Creates and names a library, sets it as either STATIC
@@ -42,6 +42,7 @@ set_target_properties(fmodL
         ${ABI_DIR}/libfmodL.so)]]
 
 # 设置第三方so库的路径，可以一起引入多个库，可代替上面libfmod.so和libfmodL.so单独引用的多行代码
+# Android 6.0以后推荐使用，上面的可能会有bug，暂时没发现。
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L${ABI_DIR}")
 
 # Searches for a specified prebuilt library and stores the path as a
